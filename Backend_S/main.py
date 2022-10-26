@@ -10,18 +10,32 @@ import json
 app = Flask(__name__)
 cors = CORS(app)
 
+#import controladores
+from Controladores.ControladorPartido import ControladorPartido
+
+#Objeto partidos
+miControladorPartido = ControladorPartido()
+
+#Mensaje servidor corriendo
 @app.route("/", methods=['GET'])
 def initServer():
     json = {}
     json['mensaje'] = 'Server Running.....'
     return jsonify(json)
 
-@app.route("/", methods=["POST"])
-def testPOST():
-    json = {}
-    json['mensaje'] = 'Servidor corriendo POST..'
+#Rutas Partido
+@app.route("/partidos", methods=['GET'])
+def indexPartido():
+    json = miControladorPartido.index()
     return jsonify(json)
 
+@app.route("/partidos", methods=['POST'])
+def createPartido():
+    data = request.get_json()
+    json = miControladorPartido.create(data)
+    return jsonify(json)
+
+#Servidor corriendo y importes json
 def loadConfig():
     with open('config.json') as f:
         data = json.load(f)
