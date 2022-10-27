@@ -54,7 +54,6 @@ class InterfaceRepositorio(Generic[T]):
         updateItem = {"$set": item}
         x = laColeccion.update_one({"_id": _id}, updateItem)
         return {"updated_count": x.matched_count}
-
     def findById(self, id):
         laColeccion = self.baseDatos[self.coleccion]
         x = laColeccion.find_one({"_id": ObjectId(id)})
@@ -64,7 +63,6 @@ class InterfaceRepositorio(Generic[T]):
         else:
             x["_id"] = x["_id"].__str__()
         return x
-
     def findAll(self):
         laColeccion = self.baseDatos[self.coleccion]
         data = []
@@ -84,7 +82,6 @@ class InterfaceRepositorio(Generic[T]):
             x = self.getValuesDBRef(x)
             data.append(x)
         return data
-
     def queryAggregation(self, theQuery):
         laColeccion = self.baseDatos[self.coleccion]
         data = []
@@ -94,6 +91,7 @@ class InterfaceRepositorio(Generic[T]):
             x = self.getValuesDBRef(x)
             data.append(x)
         return data
+
 
     def getValuesDBRef(self, x):
         keys = x.keys()
@@ -119,7 +117,6 @@ class InterfaceRepositorio(Generic[T]):
             value["_id"] = value["_id"].__str__()
             newList.append(value)
         return newList
-
     def transformObjectIds(self, x):
         for attribute in x.keys():
             if isinstance(x[attribute], ObjectId):
@@ -129,7 +126,6 @@ class InterfaceRepositorio(Generic[T]):
             elif  isinstance(x[attribute], dict):
                 x[attribute]=self.transformObjectIds(x[attribute])
         return x
-
     def formatList(self, x):
         newList = []
         for item in x:
