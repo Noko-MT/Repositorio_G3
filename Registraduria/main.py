@@ -11,51 +11,20 @@ import certifi
 app = Flask(__name__)
 cors = CORS(app)
 
-from Controladores.ControladorMesas import ControladorMesas
-miControladorMesas = ControladorMesas()
+#import Controladores
 
 
+#Mensaje servidor corriendo
 @app.route("/", methods=['GET'])
 def test():
     json = {}
     json['mensaje'] = 'Servidor corriendo...'
     return jsonify(json)
 
-@app.route("/", methods=['POST'])
-def testPOST():
-    json = {}
-    json['mensaje'] = 'Servidor corriendo POST...'
-    return jsonify(json)
-
-#Rutas para el controlador MESAS
-@app.route("/mesas", methods=['GET'])
-def indexMesas():
-    json = miControladorMesas.index()
-    return jsonify(json)
-
-@app.route("/mesas", methods=['POST'])
-def createMesas():
-    data = request.get_json()
-    json = miControladorMesas.create(data)
-    return jsonify(json)
-
-@app.route("/mesas/<string:id>", methods=['PUT'])
-def updateMesas(id):
-    data = request.get_json()
-    json = miControladorMesas.update(id, data)
-    return jsonify(json)
-
-@app.route("/mesas/<string:id>", methods=['DELETE'])
-def deleteMesas(id):
-    json = miControladorMesas.delete(id)
-    return jsonify(json)
-
-@app.route("/mesas/<string:id>", methods=['GET'])
-def showMesas(id):
-    json = miControladorMesas.show(id)
-    return jsonify(json)
+#Rutas app
 
 
+#Conexion con mongo
 def loadConfig():
     with open('config.json') as f:
         data = json.load(f)
