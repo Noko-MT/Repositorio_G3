@@ -11,20 +11,58 @@ import certifi
 app = Flask(__name__)
 cors = CORS(app)
 
-#import Controladores
+from Controladores.ControladorPartido import ControladorPartido
+
+miControladorPartido = ControladorPartido()
 
 
-#Mensaje servidor corriendo
+
 @app.route("/", methods=['GET'])
 def test():
     json = {}
     json['mensaje'] = 'Servidor corriendo...'
     return jsonify(json)
 
-#Rutas app
+@app.route("/", methods=['POST'])
+def testPOST():
+    json = {}
+    json['mensaje'] = 'Servidor corriendo POST...'
+    return jsonify(json)
 
 
-#Conexion con mongo
+
+#Rutas para el controlador PARTIDO
+
+@app.route("/partidos", methods=['GET'])
+def indexPartidos():
+    json = miControladorPartido.index()
+    return jsonify(json)
+
+@app.route("/partidos", methods=['POST'])
+def createPartidos():
+    data = request.get_json()
+    json = miControladorPartido.create(data)
+    return jsonify(json)
+
+@app.route("/partidos/<string:id>", methods=['PUT'])
+def updatePartidos(id):
+    data = request.get_json()
+    json = miControladorPartido.update(id, data)
+    return jsonify(json)
+
+@app.route("/partidos/<string:id>", methods=['DELETE'])
+def deletePartidos(id):
+    json = miControladorPartido.delete(id)
+    return jsonify(json)
+
+@app.route("/partidos/<string:id>", methods=['GET'])
+def showPartidos(id):
+    json = miControladorPartido.show(id)
+    return jsonify(json)
+
+
+#############################################
+
 def loadConfig():
     with open('config.json') as f:
         data = json.load(f)
@@ -46,3 +84,4 @@ if __name__ == '__main__':
     dataConfig = loadConfig()
     print("Servicio corriendo.... " + "http://" + dataConfig['url-backend'] + ":" + str(dataConfig['port']))
     serve(app, host=dataConfig['url-backend'], port=dataConfig['port'])
+
