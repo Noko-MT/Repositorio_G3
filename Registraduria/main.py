@@ -12,37 +12,17 @@ app = Flask(__name__)
 cors = CORS(app)
 
 #import Controladores
-from Controladores.ControladorCandidato import ControladorCandidato
-miControladorCandidato=ControladorCandidato()
+
+
 #Mensaje servidor corriendo
 @app.route("/", methods=['GET'])
 def test():
     json = {}
     json['mensaje'] = 'Servidor corriendo...'
     return jsonify(json)
+
 #Rutas app
-@app.route("/candidato", methods=['GET'])
-def indexCandidato():
-    json=miControladorCandidato.index()
-    return jsonify(json)
-@app.route("/candidato", methods=['POST'])
-def createCandidato():
-    data=request.get_json()
-    json=miControladorCandidato.create(data)
-    return jsonify(json)
-@app.route("/candidato/<string:id>", methods=['PUT'])
-def updateCandidato(id):
-    data=request.get_json()
-    json=miControladorCandidato.update(id,data)
-    return jsonify(json)
-@app.route("/candidato/<string:id>", methods=['DELETE'])
-def deleteCandidato(id):
-    json=miControladorCandidato.delete(id)
-    return jsonify(json)
-@app.route("/candidato/<string:id>", methods=['GET'])
-def showCandidato(id):
-    json=miControladorCandidato.show(id)
-    return jsonify(json)
+
 
 #Conexion con mongo
 def loadConfig():
