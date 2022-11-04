@@ -1,6 +1,8 @@
 package com.Seguridad.Registraduria_Seguridad.Controladores;
 
+import com.Seguridad.Registraduria_Seguridad.Modelos.Rol;
 import com.Seguridad.Registraduria_Seguridad.Modelos.Usuario;
+import com.Seguridad.Registraduria_Seguridad.Repositorios.RepositorioRol;
 import com.Seguridad.Registraduria_Seguridad.Repositorios.RepositorioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,13 +12,14 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
-
 @CrossOrigin
 @RestController
 @RequestMapping("/usuarios")
 public class ControladorUsuario {
     @Autowired
     private RepositorioUsuario miRepositorioUsuario;
+    @Autowired
+    private RepositorioRol miRepositorioRol;
 
     @GetMapping("")
     public List<Usuario> index() {return this.miRepositorioUsuario.findAll();}
@@ -46,6 +49,17 @@ public class ControladorUsuario {
     public Usuario show(@PathVariable String id) {
         Usuario usuario = this.miRepositorioUsuario.findById(id).orElse(null);
         return usuario;
+    }
+    @PutMapping("{id_usuario}/rol/{id_rol}")
+    public Usuario setRol(@PathVariable String id_usuario, @PathVariable String id_rol){
+        Usuario usuario = this.miRepositorioUsuario.findById(id_usuario).orElse(null);
+        Rol rol = this.miRepositorioRol.findById(id_rol).orElse(null);
+        if (usuario != null && rol != null){
+            usuario.setRol(rol);
+            return this.miRepositorioUsuario.save(usuario);
+        }else {
+            return null;
+        }
     }
     public String convertirSHA256(String password) {
         MessageDigest md = null;
