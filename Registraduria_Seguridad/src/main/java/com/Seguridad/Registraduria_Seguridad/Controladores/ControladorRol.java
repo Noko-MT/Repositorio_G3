@@ -33,6 +33,7 @@ public class ControladorRol{
         Rol rol = this.miRepositorioRol.findById(id).orElse(null);
         if (rol != null) {
             rol.setNombre(infoRol.getNombre());
+            rol.setDescripcion(infoRol.getDescripcion());
             return this.miRepositorioRol.save(rol);
         } else {
             return null;
