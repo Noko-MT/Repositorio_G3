@@ -1,6 +1,5 @@
 package com.Seguridad.Registraduria_Seguridad.Controladores;
 
-<<<<<<< HEAD
 import com.Seguridad.Registraduria_Seguridad.Modelos.Rol;
 import com.Seguridad.Registraduria_Seguridad.Modelos.Usuario;
 import com.Seguridad.Registraduria_Seguridad.Repositorios.RepositorioRol;
@@ -95,7 +94,4 @@ public class ControladorUsuario {
             throw new RuntimeException(e);
         }
     }
-=======
-public class ControladorUsuario {
->>>>>>> Nadira
 }

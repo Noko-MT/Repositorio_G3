@@ -1,8 +1,4 @@
 package com.Seguridad.Registraduria_Seguridad.Modelos;
-
-<<<<<<< HEAD
-public class Rol {
-=======
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -40,5 +36,4 @@ public class Rol {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
->>>>>>> Nadira
 }

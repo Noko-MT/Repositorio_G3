@@ -1,8 +1,5 @@
 package com.Seguridad.Registraduria_Seguridad.Controladores;
 
-<<<<<<< HEAD
-public class ControladorRol {
-=======
 
 import com.Seguridad.Registraduria_Seguridad.Modelos.Rol;
 import com.Seguridad.Registraduria_Seguridad.Repositorios.RepositorioRol;
@@ -59,5 +56,4 @@ public class ControladorRol{
     }
 
 
->>>>>>> Nadira
 }
