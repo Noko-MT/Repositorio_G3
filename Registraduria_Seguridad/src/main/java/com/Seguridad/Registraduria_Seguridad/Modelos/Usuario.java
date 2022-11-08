@@ -1,5 +1,6 @@
 package com.Seguridad.Registraduria_Seguridad.Modelos;
 
+<<<<<<< HEAD
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -41,3 +42,7 @@ public class Usuario {
 }
 
 
+=======
+public class Usuario {
+}
+>>>>>>> Nadira
