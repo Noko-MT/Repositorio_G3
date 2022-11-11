@@ -66,7 +66,7 @@ public class ControladorPermisoRol {
             this.miRepositorioPermisoRol.delete(permisoRol);
         }
     }
-
+    //Nota
     @GetMapping("{id}")
     public PermisoRol show(@PathVariable String id) {
         PermisoRol permisoRol = this.miRepositorioPermisoRol.findById(id).orElse(null);
